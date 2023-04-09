@@ -16,27 +16,27 @@
                 <ul>
                     <li id="frame_txt">
                         <b>Frame</b>
-                        <p>Carbon Fiber<i>40 000,00</i></p>
+                        <p>Carbon Fiber</p><i>40 000,00</i>
                     </li>
                     <li id="seat_txt">
                         <b>Seat</b>
-                        <p>Polished Leather<i>1 500,00</i></p>
+                        <p>Polished Leather</p><i>1 500,00</i>
                     </li>
                     <li id="motor_txt">
                         <b>Motor</b>
-                        <p>Thunder 150 HP<i>2 000,00</i></p>
+                        <p>Thunder 150 HP</p><i>2 000,00</i>
                     </li>
                     <li id="battery_txt">
                         <b>Battery</b>
-                        <p>Li-ion 400 km<i>1 000,00</i></p>
+                        <p>Li-ion 400 km</p><i>1 000,00</i>
                     </li>
                     <li id="tires_txt">
                         <b>Tires</b>
-                        <p>Urban<i>800,00</i></p>
+                        <p>Urban</p><i>800,00</i>
                     </li>
                     <li id="color_txt">
                         <b>Color</b>
-                        <p>#000 <i>400,00</i></p>
+                        <p>#000 </p><i>400,00</i>
                     </li>
                 </ul>
             </div>
@@ -44,7 +44,7 @@
                 <img src="img/preview/frame1.png" alt="" id="frame">
                 <img src="img/preview/seat1.png" alt="" id="seat">
                 <img src="img/preview/color.png" alt="" id="colorhue" style="filter: hue-rotate(90deg);">
-                <img src="img/preview/wheels1.png" alt="" id="wheels">
+                <img src="img/preview/tires1.png" alt="" id="tires">
                 <img src="img/preview/engine1.png" alt="" id="engine">
                 <img src="img/preview/battery1.png" alt="" id="battery">
             </div>
@@ -57,46 +57,122 @@
                     <input type="radio" id="frame1" name="frame" value="frame1" checked>
                     <label for="frame1">Carbon Fiber</label><br>
                     <input type="radio" id="frame2" name="frame" value="frame2">
-                    <label for="frame2">Aluminium</label><br>
+                    <label for="frame2">Titanium</label><br>
                     <input type="radio" id="frame3" name="frame" value="frame3">
-                    <label for="frame3">Titanium</label>
+                    <label for="frame3">Aluminium</label>
                 </div>
             </div>
+            
+        </div>
         </div>
 
 
     </div>
     <script>
         const partsData = {
-            'frame1': ['Carbon Fiber', '40 000,00'],
-            'frame2': ['Polished Leather', '1 500,00'],
-            'frame3': ['Thunder 150 HP', '2 000,00'],
+            'frame': [
+                ['Carbon Fiber', 40000],
+                ['Titanium', 30000],
+                ['Aluminium', 20000]
+                ],
+            'seat': [
+                ['Polished Leather', 1500],
+                ['Faux Leather', 1400],
+                ['PVC', 1300],
+                ['Reindeer Pelt', 1200],
+                ],
+            'engine': [
+                ['Thunder (150 HP)', 2000],
+                ['Flash (50 HP)', 1400],
+                ['Spark (5 HP)', 1300]
+                ],
+            'battery': [
+                ['Li-ion (400 km*)', 1000],
+                ['Li-ion (200 km*)', 800],
+                ['Lead Acid (80 km*)', 700],
+                ['AAA (2 km*)', 500],
+                ],
+            'tires': [
+                ['Urban', 400],
+                ['All-road', 800],
+                ['Off-road', 1600]
+                ],
+            'color': [
+                ['#000', 400],
+                ],
             }
+        const init = () => {
+            
+            let html = '' 
+            for (const [key, value] of Object.entries(partsData)) {
+                console.log(`${key}: ${value}`);
+                html += `<div class="option" id="${key}_option">`
+                    html += `<img src="img/thumbs/${key}1.png" alt="">`
+                    html += `<div><h3>${key}</h3>`
+                    
+                    value.forEach((element, index) => {
+                        let checkedVal = index==0 ? 'checked' : ''
+                        if (key != 'color'){
+                        html +=
+                        `<input type="radio" id="${key}${index+1}" name="${key}" value="${key}${index+1}" ${checkedVal}>
+                        <label for="${key}${index+1}">${element[0]}</label><br>`
+                        }
+     
 
+                    });
+                    if (key == 'color'){
+                    html+= `
+                      <input type="range" id="colorrange" name="color" min="0" max="360"
+                            oninput="updateHue(this.value)"
+                            onchange="changeHue(this.value)" >
+                    <label for="colorrange">HUE</label>
+                    `
+                    }
+
+                html += '</div></div>'
+            }
+            
+            const baseElem = document.getElementById('options')
+            baseElem.innerHTML = html
+
+        }
+        const updateHue = (value) => {
+
+        }
+        const changeHue = (value) => {
+            document.getElementById('colorhue').setAttribute('style', `filter: hue-rotate(${value}deg)`)
+        }
         const changeThumbnail = (partName, itemNumber) => {
             const elem = `${partName}_option`
             const thumbnailElem = document.querySelector(`#${elem}>img`)
             const source = thumbnailElem.getAttribute('src')
             thumbnailElem.setAttribute('src', `img/thumbs/${partName}${itemNumber}.png`)
-            console.log(source)
         }
         const updateMotorcycle = (partName, itemNumber) => {
+            console.log(partName)
             const imgElem = document.getElementById(partName)
             imgElem.setAttribute('src', `img/preview/${partName}${itemNumber}.png`)
+        }
+        const updatePartsList = (item, itemNumber) => {
+            const elem = document.getElementById(`${item}_txt`)
+            elem.querySelector('p').innerHTML = partsData[item][itemNumber-1][0]
+            elem.querySelector('i').innerHTML = partsData[item][itemNumber-1][1] + ' €'
         }
         const updateView = (item) => {
             const partName = item.slice(0, -1);
             const itemNumber = parseInt(item.slice(-1));
-            console.log('Part: ' + partName)
-            console.log('Number: ' + itemNumber)
             changeThumbnail(partName, itemNumber)
             updateMotorcycle(partName, itemNumber)
+            updatePartsList(partName, itemNumber)
         }
+
+
         $(document).ready(function(){
             $('input[type=radio]').click(function(){
                 updateView(this.value)
             });
         });
+        init()
     </script>
 </body>
 </html>
