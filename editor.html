@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor</title>
     <link rel="stylesheet" href="editor.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
     <div id="editor">
@@ -13,56 +14,89 @@
         <div class="split">
             <div id="parts">
                 <ul>
-                    <li>
+                    <li id="frame_txt">
                         <b>Frame</b>
                         <p>Carbon Fiber<i>40 000,00</i></p>
                     </li>
-                    <li>
+                    <li id="seat_txt">
                         <b>Seat</b>
                         <p>Polished Leather<i>1 500,00</i></p>
                     </li>
-                    <li>
+                    <li id="motor_txt">
                         <b>Motor</b>
                         <p>Thunder 150 HP<i>2 000,00</i></p>
                     </li>
-                    <li>
+                    <li id="battery_txt">
                         <b>Battery</b>
                         <p>Li-ion 400 km<i>1 000,00</i></p>
                     </li>
-                    <li>
+                    <li id="tires_txt">
                         <b>Tires</b>
                         <p>Urban<i>800,00</i></p>
                     </li>
-                    <li>
+                    <li id="color_txt">
                         <b>Color</b>
                         <p>#000 <i>400,00</i></p>
                     </li>
                 </ul>
             </div>
             <div id="preview">
-                <img src="img/hull1.png" alt="" id="hull">
-                <img src="img/color.png" alt="" id="colorhue" style="filter: hue-rotate(90deg);">
-                <img src="img/wheels1.png" alt="" id="wheels">
-                <img src="img/engine1.png" alt="" id="engine">
-                <img src="img/battery1.png" alt="" id="battery">
+                <img src="img/preview/frame1.png" alt="" id="frame">
+                <img src="img/preview/seat1.png" alt="" id="seat">
+                <img src="img/preview/color.png" alt="" id="colorhue" style="filter: hue-rotate(90deg);">
+                <img src="img/preview/wheels1.png" alt="" id="wheels">
+                <img src="img/preview/engine1.png" alt="" id="engine">
+                <img src="img/preview/battery1.png" alt="" id="battery">
             </div>
         </div>
         <div id="options">
-            <div class="option">
-                <img src="img/placeholder.png" alt="">
+            <div class="option" id="frame_option">
+                <img src="img/thumbs/frame1.png" alt="">
                 <div>
                     <h3>Frame</h3>
-                    <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">HTML</label><br>
-                    <input type="radio" id="css" name="fav_language" value="CSS">
-                    <label for="css">CSS</label><br>
-                    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-                    <label for="javascript">JavaScript</label>
+                    <input type="radio" id="frame1" name="frame" value="frame1" checked>
+                    <label for="frame1">Carbon Fiber</label><br>
+                    <input type="radio" id="frame2" name="frame" value="frame2">
+                    <label for="frame2">Aluminium</label><br>
+                    <input type="radio" id="frame3" name="frame" value="frame3">
+                    <label for="frame3">Titanium</label>
                 </div>
             </div>
         </div>
 
 
     </div>
+    <script>
+        const partsData = {
+            'frame1': ['Carbon Fiber', '40 000,00'],
+            'frame2': ['Polished Leather', '1 500,00'],
+            'frame3': ['Thunder 150 HP', '2 000,00'],
+            }
+
+        const changeThumbnail = (partName, itemNumber) => {
+            const elem = `${partName}_option`
+            const thumbnailElem = document.querySelector(`#${elem}>img`)
+            const source = thumbnailElem.getAttribute('src')
+            thumbnailElem.setAttribute('src', `img/thumbs/${partName}${itemNumber}.png`)
+            console.log(source)
+        }
+        const updateMotorcycle = (partName, itemNumber) => {
+            const imgElem = document.getElementById(partName)
+            imgElem.setAttribute('src', `img/preview/${partName}${itemNumber}.png`)
+        }
+        const updateView = (item) => {
+            const partName = item.slice(0, -1);
+            const itemNumber = parseInt(item.slice(-1));
+            console.log('Part: ' + partName)
+            console.log('Number: ' + itemNumber)
+            changeThumbnail(partName, itemNumber)
+            updateMotorcycle(partName, itemNumber)
+        }
+        $(document).ready(function(){
+            $('input[type=radio]').click(function(){
+                updateView(this.value)
+            });
+        });
+    </script>
 </body>
 </html>

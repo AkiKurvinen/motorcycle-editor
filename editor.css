@@ -9,10 +9,16 @@ body{
     background-color: #999;
     position: relative;
 }
-#hull{
+#frame{
     position: absolute;
     top: 0;
     left: 0;
+}
+#seat{
+    position: absolute;
+    top: 106px;
+    left: 130px;
+    z-index: -1;
 }
 #colorhue{
     position: absolute;
