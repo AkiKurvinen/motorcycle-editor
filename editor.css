@@ -9,7 +9,6 @@ body{
 }
 #editor{
   min-height: 100vh;
-
 }
 .wrapper{
         max-width: 1000px;
@@ -37,6 +36,12 @@ body{
 }
 #totalAmount span{
     padding-top: 0;
+}
+#changeEditor{
+    display: block;
+    text-align: center;
+    margin: 3em auto;
+    width: 200px;
 }
 #totalAmount{
     border-top: solid thick black;
@@ -88,7 +93,6 @@ label:hover{
 }
 /*preview*/
 #preview{
-    background-color: #999;
     position: relative;
     margin-top: 2em;
 }
@@ -185,76 +189,125 @@ label:hover{
     z-index: 2;
 }
 @media only screen and (max-width: 900px) {
-  body {
-    background-color: lightblue;
-  }
-  h1{
-    font-size: 1.1em;
-  }
-  #priceTag{
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em 1em;
-  }
-  #optionsLabels{
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em 4em 0.5em 0.5em;
-  }
-  .dropIco{
-    font-style: normal;
-  }
-  .editorheader{
-    padding: 0.5em;
-    height: 50px;
-  }
-  summary{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid gray;
-  }
-  details input{
-    margin-left: 1em;
-  }
+    h1{
+        font-size: 1.1em;
+    }
+    #priceTag{
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5em 1em;
+    }
+    .dark #priceTag{
+        background-color: white;
+        color: black;
+    }
+    #optionsLabels{
+        display: flex;
 
-  details label{
-    display: inline-block;
-    padding-bottom: 1em;
-    width: 80%;
-  }
-  details span{
-    display: block;
-    text-align: right;
-    float: inline-end
-    
-  }
-  details{
-    margin: 0;
-    padding: 0;
-     
-  }
-  details h3{
-    margin: 0;
-  }
-   details > summary:hover{
-    cursor: pointer;
-    color: white;
-    background-color: black;
-   }
+        padding: 0.5em 4em 0.5em 0.5em;
+    }
+    #optionsLabels span{
+        width: 25%;
+    }
+    #optionsLabels span:nth-child(3){
+        width: 50%;
+        text-align: right;
+    } 
+    .dropIco{
+        font-style: normal;
+    }
+    .editorheader{
+        padding: 0.5em;
+        height: 50px;
+    }
+    summary{
+        display: flex;
+        justify-content: space-between;
+        border-top: solid thin black;
+        border-bottom: solid thin black;
+    }
+    .dark summary{
+        border-color: white;
+    }
+    details input{
+        margin-left: 1em;
+        margin: 1em;
+    }
+    .option{
+        display: flex;
+        justify-content: space-between;
+ 
+    }
+
+    details:not(details:last-child) label{
+        width: 100%;
+    }
+    details>summary {
+        list-style: none;
+    }
+    summary::-webkit-details-marker {
+        display: none
+    }
+
+    summary::after {
+        content: '▼';
+        margin: 0;
+    }
+    details[open] summary:after {
+        content: '▲';
+    }
+
+    details:last-child input{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        vertical-align: middle;
+    }
+
+    details span:not(label span){
+        display: block;
+        text-align: right;
+    }
+    details{
+        margin: 0;
+        padding: 0;
+    }
+    .dark details summary{
+        background-color: black;
+    }
+    .dark details{
+        background-color: #222;
+    }
+    details i{
+        font-style: normal;
+    }
+    details h3{
+        margin: 0;
+    }
+    details h3 + i{
+        width: 40%;
+        text-align: left;
+        font-style: normal;
+    }
+    details span{
+        width: 30%;
+    }
+    details > summary:hover{
+        cursor: pointer;
+        color: white;
+        background-color: black;
+    }
     details > summary {
-    list-style-type: '⯆';
-
+        list-style-type: '⯆';
     }
     summary{
         position: relative;
         padding: 0.5em;
     }
     summary h3{
-        width: 30%;
+        width: 20%;
     }
     details[open] > summary {
         list-style-type: '⯅';
@@ -263,37 +316,50 @@ label:hover{
     details[open] > summary {
         margin-bottom: 0.5rem;
     }
-  #preview{
-    margin: 0 auto;
-    display: block;
-    background-color: rgb(161, 92, 92);
-    height: 250px;
-    width: 200vw;
-    scale: 0.6;
-    transform-origin: top left;
-  }
-  #options{
-    display: block;
-    padding-top: 0;
-  }
-  #options h3{
-    display: inline-block;
-  }
-  .option{
-    display: block;
-    padding-left: 0;
-  }
-  #colorBall{
-    position: relative;
-    float: left;
-    max-width: 100px;
-  }
-  #colorSpecular{
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  #color_option{
-    display: flex;
-  }
+    details span{
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+    }
+    details label{
+        padding: 1em;
+        box-sizing: border-box;
+    }
+    details label i{
+        display: inline-block;
+        width:45%;
+    }
+    #preview{
+        margin: 0 auto;
+        display: block;
+        height: 250px;
+        width: 200vw;
+        scale: 0.6;
+        transform-origin: top left;
+    }
+    #options{
+        display: block;
+        padding-top: 0;
+        overflow-x: auto;
+        max-height: 50vh;
+    }
+    #options h3{
+        display: inline-block;
+    }
+    .option{
+        display: block;
+        padding-left: 0;
+    }
+    #color_thumb{
+        position: relative;
+        float: left;
+        max-width: 100px;
+        min-width:40%;
+    }
+    #colorSpecular{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+   
 }

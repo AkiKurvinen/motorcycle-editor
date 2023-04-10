@@ -24,8 +24,6 @@
         </div>
         </div>
       
-
-           <!-- <div id="parts"></div>-->
             <div id="preview">
                 <img src="img/preview/headlight.svg" alt="" id="headlight">
                 <img src="img/preview/frame1.png" alt="" id="frame">
@@ -37,13 +35,14 @@
                 <img src="img/preview/battery1.png" alt="" id="battery">
                 <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
+       
         <div id="priceTag">Total (VAT 0%) <span>10000€</span></div>
         <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
         <div id="options" style="scroll-behavior: smooth;">
             
         </div>
         </div>
-        <a href="editor.html">Desktop Editor</a>
+        <a href="editor.html" id="changeEditor">Go To Desktop Editor</a>
     </div>
 
 
@@ -60,9 +59,9 @@
                 html += `<details class="option" id="${key}_option">`
                     //html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
             
-                    html += `<summary><h3>${key}</h3><i>${value[0][0]}</i><span>${formatPrice(value[0][1])}</span> <i class="dropIco">▽</i></summary>`
-                            if(key=='color'){
-                        html += '<div id="colorBall"><img src="img/thumbs/color1.png" alt="" id="color1">'
+                    html += `<summary><h3>${key}</h3><i>${value[0][0]}</i><span>${formatPrice(value[0][1])}</span></summary>`
+                    if(key=='color'){
+                        html += '<div id="color_thumb"><img src="img/thumbs/color1.png" alt="" id="color1">'
                         html += '<img src="img/thumbs/color_specular.png" alt="" id="colorSpecular"></div>'
                     }
                     value.forEach((element, index) => {
@@ -73,13 +72,14 @@
                         if (key != 'color'){
                         html +=
                         `<input type="radio" id="${key}${index+1}" name="${key}" value="${key}${index+1}" ${checkedVal}>
-                        <label for="${key}${index+1}">${element[0]} <span>${element[1]}</span></label><br>`
+                        <label for="${key}${index+1}"><i>${element[0]}</i> <span>${formatPrice(element[1])}</span></label><br>`
                         }
      
 
                     });
                     if (key == 'color'){
                     html+= `
+                    <div>
                       <input type="range" id="colorrange" name="hue" min="0" max="360"
                             oninput="updateBikeColors('h', this.value)"
                             onchange="updateBikeColors('h', this.value)" >
@@ -94,6 +94,7 @@
                             oninput="updateBikeColors('l', this.value)"
                             onchange="updateBikeColors('l', this.value)" >
                       <label for="colorrange">L</label>
+                      </div>
                      `
                     }
                 
@@ -111,7 +112,7 @@
         }
       
         initMobile()
-       // updatePrice()
+        updateMobilePrice()
     </script>
     <script>
         $(document).ready(function(){
@@ -119,6 +120,8 @@
             updateViewMob(this.value)
             });
         });
+
+
     </script>
 
 

@@ -75,7 +75,7 @@ const updateMobilePrice = () => {
     });
 
     let price = formatPrice(totalSum)
-    document.querySelector("#priceTag span").innerHTML = `${price}`;
+    document.querySelector("#priceTag span").innerHTML = `${price} €`;
 }
 
 const updateSummaryList = (item, itemNumber) => {
