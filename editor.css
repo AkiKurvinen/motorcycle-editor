@@ -1,22 +1,55 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+   overflow-x: hidden;
 }
 .split{
     display: flex;
     gap: 1em;
 }
-.editor{
-    background-color: white;
-    color: black;
+#editor{
+  min-height: 100vh;
+
+}
+.wrapper{
+        max-width: 1000px;
+    margin: 0 auto;
+}
+.light{
+    background-color:white;
+    color: black; 
 }
 .dark{
-    background-color: #111;
+    background-color: black;
     color: white;
 }
 .editorheader{
     display: flex;
     justify-content: space-between;
+}
+
+.editorheader div{
+    display: flex;
+    align-items: center;
+}
+.editorheader div i{
+    margin-right: 1em;
+}
+#totalAmount span{
+    padding-top: 0;
+}
+#totalAmount{
+    border-top: solid thick black;
+    padding-top: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.dark #totalAmount{
+    border-top-color: white;
+}
+label:hover{
+    cursor: pointer;
 }
 /*parts*/
 #parts{
@@ -26,11 +59,12 @@ body{
     list-style-type: none;
 }
 #parts ul li{
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 #parts span{
     display: flex;
     justify-content: space-between;
+    padding-top: 0.5em;
 }
 #parts ul p{
     margin: 0;
@@ -40,6 +74,9 @@ body{
     display: block;
     border-bottom: solid thin black;
     text-transform: capitalize;
+}
+.dark #parts ul b{
+    border-bottom-color: white;
 }
 #parts ul p{
     display: inline-block;
@@ -61,7 +98,7 @@ body{
     left: 130px;
     z-index: 3;
 }
-#colorhue{
+#colorhue, #specular{
     position: absolute;
     z-index: 2;
 }
@@ -104,19 +141,37 @@ body{
 }
 /* options side scroller*/
 #options{
-    background-color: black;
-    color: white;
+    border-top: solid thin black;
+    background-color: white;
+    color: black;
     width: 100%;
     overflow-x: auto;
     display: flex;
+    padding: 1em 0;
+}
+.dark #options{
+        background-color: black;
+    color: white;
+    border-top-color: white;
+}
+#options h3{
+    text-transform: capitalize;
 }
 .option{
     display: flex;
 }
 .option img{
-    max-width: 125px;
+    max-height: 125px;
+    width: auto;
     margin-right: 0.5em;
 }
 .option div{
     min-width: 200px;
+}
+#color_option{
+    position: relative;
+}
+#colorSpecular{
+    position: absolute;
+    z-index: 2;
 }

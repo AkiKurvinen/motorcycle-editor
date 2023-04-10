@@ -11,9 +11,10 @@
 </head>
 <body>
     <div id="editor">
+        <div class="wrapper">
         <div class="editorheader">
         <h1>Customize your TH8</h1>
-        <div>
+        <div><i>Dark Mode</i>
             <label class="switch">
             <input type="checkbox" id="darkmode" onclick="darkMode()">
             <span class="slider round"></span>
@@ -23,38 +24,13 @@
   
         <div class="split">
             <div id="parts">
-                <ul>
-                    <li id="frame_txt">
-                        <b>Frame</b>
-                        <span><p>Carbon Fiber</p><i>40 000,00</i></span>
-                    </li>
-                    <li id="seat_txt">
-                        <b>Seat</b>
-                        <p>Polished Leather</p><i>1 500,00</i>
-                    </li>
-                    <li id="motor_txt">
-                        <b>Motor</b>
-                        <p>Thunder 150 HP</p><i>2 000,00</i>
-                    </li>
-                    <li id="battery_txt">
-                        <b>Battery</b>
-                        <p>Li-ion 400 km</p><i>1 000,00</i>
-                    </li>
-                    <li id="tires_txt">
-                        <b>Tires</b>
-                        <p>Urban</p><i>800,00</i>
-                    </li>
-                    <li id="color_txt">
-                        <b>Color</b>
-                        <p>#000 </p><i>400,00</i>
-                    </li>
-                </ul>
             </div>
             <div id="preview">
                 <img src="img/preview/headlight.svg" alt="" id="headlight">
                 <img src="img/preview/frame1.png" alt="" id="frame">
                 <img src="img/preview/seat1.png" alt="" id="seat">
                 <img src="img/preview/color.png" alt="" id="colorhue" style="filter: hue-rotate(90deg);">
+                <img src="img/preview/specular.png" alt="" id="specular">
                 <img src="img/preview/tires1.png" alt="" id="tires">
                 <img src="img/preview/engine1.png" alt="" id="engine">
                 <img src="img/preview/battery1.png" alt="" id="battery">
@@ -62,24 +38,13 @@
             </div>
         </div>
         <div id="options">
-            <div class="option" id="frame_option">
-                <img src="img/thumbs/frame1.png" alt="">
-                <div>
-                    <h3>Frame</h3>
-                    <input type="radio" id="frame1" name="frame" value="frame1" checked>
-                    <label for="frame1">Carbon Fiber</label><br>
-                    <input type="radio" id="frame2" name="frame" value="frame2">
-                    <label for="frame2">Titanium</label><br>
-                    <input type="radio" id="frame3" name="frame" value="frame3">
-                    <label for="frame3">Aluminium</label>
-                </div>
-            </div>
             
         </div>
         </div>
-
-
     </div>
+
+
+
     <script>
 
         
@@ -120,6 +85,9 @@
         let saturation = 1;
         let lightness = 1;
         
+        const formatPrice = (x) => {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
         const init = () => {
             let partsHtml = '<ul>'
             let html = '' 
@@ -128,12 +96,15 @@
                 //console.log(`${key}: ${value}`);
                 partsHtml += `<li id="${key}_txt"><b>${key}</b>`
                 html += `<div class="option" id="${key}_option">`
-                    html += `<img src="img/thumbs/${key}1.png" alt="">`
+                    html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
+                    if(key=='color'){
+                        html += '<img src="img/thumbs/color_specular.png" alt="" id="colorSpecular">'
+                    }
                     html += `<div><h3>${key}</h3>`
                     
                     value.forEach((element, index) => {
                         if(index==0){
-                            partsHtml += `<span><p>${element[0]}</p><i>${element[1]} €</i></span></li>`
+                            partsHtml += `<span><p>${element[0]}</p><i>${formatPrice(element[1])} €</i></span></li>`
                         }
                         let checkedVal = index==0 ? 'checked' : ''
                         if (key != 'color'){
@@ -162,19 +133,23 @@
                       <label for="colorrange">L</label>
                      `
                     }
-
+                
                 html += '</div></div>'
             }
-            
+            partsHtml+= '<li><h4 id="totalAmount">Total: <span>0 €</span></h4></li></ul>'
             const baseElem = document.getElementById('options')
             baseElem.innerHTML = html
             
             const partsBaseElem = document.getElementById('parts')
             partsBaseElem.innerHTML = partsHtml
+            
+
+            changeBikeFilter()
 
         }
         const changeBikeFilter = () => {
             document.getElementById('colorhue').setAttribute('style', `filter: hue-rotate(${hue}deg) saturate(${saturation}) brightness(${lightness});`)
+            document.getElementById('color_thumb').setAttribute('style', `filter: hue-rotate(${hue}deg) saturate(${saturation}) brightness(${lightness});`)
         }
         const updateBikeColors = (param, value) => {
 
@@ -198,15 +173,23 @@
             const source = thumbnailElem.getAttribute('src')
             thumbnailElem.setAttribute('src', `img/thumbs/${partName}${itemNumber}.png`)
         }
+        const updatePrice = () => {
+            let totalSum = 0
+            document.querySelectorAll('#parts i').forEach(element => {
+                totalSum += parseInt(element.innerHTML.replace(' ',''))
+            });
+        
+            let price = formatPrice(totalSum)
+            document.querySelector("#totalAmount span").innerHTML = `${price} €`;
+        }
         const updateMotorcycle = (partName, itemNumber) => {
-            console.log(partName)
             const imgElem = document.getElementById(partName)
-            imgElem.setAttribute('src', `img/preview/${partName}${itemNumber}.png`)
+            imgElem.setAttribute('src', `img/preview/${partName}${itemNumber}.png`)  
         }
         const updatePartsList = (item, itemNumber) => {
             const elem = document.getElementById(`${item}_txt`)
             elem.querySelector('p').innerHTML = partsData[item][itemNumber-1][0]
-            elem.querySelector('i').innerHTML = partsData[item][itemNumber-1][1] + ' €'
+            elem.querySelector('i').innerHTML = formatPrice(partsData[item][itemNumber-1][1]) + ' €'
         }
         const updateView = (item) => {
             const partName = item.slice(0, -1);
@@ -214,15 +197,18 @@
             changeThumbnail(partName, itemNumber)
             updateMotorcycle(partName, itemNumber)
             updatePartsList(partName, itemNumber)
+            updatePrice()
         }
-
 
         $(document).ready(function(){
             $('input[type=radio]').click(function(){
                 updateView(this.value)
             });
         });
+        
         init()
+        updatePrice()
+
     </script>
     <script>
     function darkMode() {
@@ -233,7 +219,16 @@
         } else {
              editorElem.className = 'light'
         }
-        }
+    }
+    </script>
+    <script>
+        const scrollContainer = document.querySelector("#options");
+
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY;
+        });
+
     </script>
 
 </body>
