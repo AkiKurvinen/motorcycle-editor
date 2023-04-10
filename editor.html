@@ -26,7 +26,7 @@
                 <ul>
                     <li id="frame_txt">
                         <b>Frame</b>
-                        <p>Carbon Fiber</p><i>40 000,00</i>
+                        <span><p>Carbon Fiber</p><i>40 000,00</i></span>
                     </li>
                     <li id="seat_txt">
                         <b>Seat</b>
@@ -121,15 +121,20 @@
         let lightness = 1;
         
         const init = () => {
-            
+            let partsHtml = '<ul>'
             let html = '' 
+
             for (const [key, value] of Object.entries(partsData)) {
-                console.log(`${key}: ${value}`);
+                //console.log(`${key}: ${value}`);
+                partsHtml += `<li id="${key}_txt"><b>${key}</b>`
                 html += `<div class="option" id="${key}_option">`
                     html += `<img src="img/thumbs/${key}1.png" alt="">`
                     html += `<div><h3>${key}</h3>`
                     
                     value.forEach((element, index) => {
+                        if(index==0){
+                            partsHtml += `<span><p>${element[0]}</p><i>${element[1]} €</i></span></li>`
+                        }
                         let checkedVal = index==0 ? 'checked' : ''
                         if (key != 'color'){
                         html +=
@@ -163,6 +168,9 @@
             
             const baseElem = document.getElementById('options')
             baseElem.innerHTML = html
+            
+            const partsBaseElem = document.getElementById('parts')
+            partsBaseElem.innerHTML = partsHtml
 
         }
         const changeBikeFilter = () => {

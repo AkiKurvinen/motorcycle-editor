@@ -18,9 +18,33 @@ body{
     display: flex;
     justify-content: space-between;
 }
+/*parts*/
 #parts{
-    min-width: 200px;
+    min-width: 250px;
 }
+#parts ul{
+    list-style-type: none;
+}
+#parts ul li{
+    margin-bottom: 1em;
+}
+#parts span{
+    display: flex;
+    justify-content: space-between;
+}
+#parts ul p{
+    margin: 0;
+}
+#parts ul b{
+    width: 100%;
+    display: block;
+    border-bottom: solid thin black;
+    text-transform: capitalize;
+}
+#parts ul p{
+    display: inline-block;
+}
+/*preview*/
 #preview{
     background-color: #999;
     position: relative;
@@ -35,10 +59,11 @@ body{
     position: absolute;
     top: 106px;
     left: 130px;
-    z-index: 1;
+    z-index: 3;
 }
 #colorhue{
     position: absolute;
+    z-index: 2;
 }
 #tires{
     position: absolute;
