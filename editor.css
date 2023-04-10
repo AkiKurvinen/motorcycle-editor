@@ -184,3 +184,47 @@ label:hover{
     position: absolute;
     z-index: 2;
 }
+@media only screen and (max-width: 900px) {
+  body {
+    background-color: lightblue;
+  }
+  h1{
+    font-size: 1.1em;
+  }
+  .editorheader{
+    padding: 0.5em;
+  }
+
+  #preview{
+    margin: 0 auto;
+    display: block;
+    background-color: rgb(161, 92, 92);
+    height: 250px;
+    width: 200vw;
+    scale: 0.6;
+    transform-origin: top left;
+  }
+  #options{
+    display: block;
+    
+  }
+  #options h3{
+    display: inline-block;
+  }
+  .option{
+    display: block;
+  }
+  #colorBall{
+    position: relative;
+    float: left;
+    max-width: 100px;
+  }
+  #colorSpecular{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  #color_option{
+    display: flex;
+  }
+}

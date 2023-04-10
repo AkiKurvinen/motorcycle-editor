@@ -15,18 +15,17 @@
     <div id="editor">
         <div class="wrapper">
         <div class="editorheader">
-        <h1>Customize your e-motorcycle</h1>
-        <div><i>Dark Mode</i>
+        <h1>Customize</h1>
+        <div><i>Dark&nbsp;Mode</i>
             <label class="switch">
             <input type="checkbox" id="darkmode" onclick="darkMode()">
             <span class="slider round"></span>
             </label>
-            </div>
         </div>
-  
-        <div class="split">
-            <div id="parts">
-            </div>
+        </div>
+      
+
+           <!-- <div id="parts"></div>-->
             <div id="preview">
                 <img src="img/preview/headlight.svg" alt="" id="headlight">
                 <img src="img/preview/frame1.png" alt="" id="frame">
@@ -38,41 +37,43 @@
                 <img src="img/preview/battery1.png" alt="" id="battery">
                 <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
-        </div>
+        <div id="priceTag">Total (VAT 0%) 10000€</div>
+        <div id="optionsLabels">Part Item Eur</div>
         <div id="options" style="scroll-behavior: smooth;">
             
         </div>
         </div>
-        <a href="mobile.html">Mobile Editor</a>
+        <a href="editor.html">Desktop Editor</a>
     </div>
 
 
 
     <script>
 
-        const initDesktop = () => {
-            let partsHtml = '<ul>'
+        const initMobile = () => {
+            //let partsHtml = '<ul>'
             let html = '' 
 
             for (const [key, value] of Object.entries(partsData)) {
                 //console.log(`${key}: ${value}`);
-                partsHtml += `<li id="${key}_txt"><b><a href="#${key}_option">${key}</a></b>`
-                html += `<div class="option" id="${key}_option">`
-                    html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
-                    if(key=='color'){
-                        html += '<img src="img/thumbs/color_specular.png" alt="" id="colorSpecular">'
+                //partsHtml += `<li id="${key}_txt"><b><a href="#${key}_option">${key}</a></b>`
+                html += `<details class="option" id="${key}_option">`
+                    //html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
+            
+                    html += `<summary><h3>${key}</h3> Carbon Fiber 1000€</summary>`
+                            if(key=='color'){
+                        html += '<div id="colorBall"><img src="img/thumbs/color1.png" alt="" id="color1">'
+                        html += '<img src="img/thumbs/color_specular.png" alt="" id="colorSpecular"></div>'
                     }
-                    html += `<div><h3>${key}</h3>`
-                    
                     value.forEach((element, index) => {
                         if(index==0){
-                            partsHtml += `<span><p>${element[0]}</p><i>${formatPrice(element[1])} €</i></span></li>`
+                            //partsHtml += `<span><p>${element[0]}</p><i>${formatPrice(element[1])} €</i></span></li>`
                         }
                         let checkedVal = index==0 ? 'checked' : ''
                         if (key != 'color'){
                         html +=
                         `<input type="radio" id="${key}${index+1}" name="${key}" value="${key}${index+1}" ${checkedVal}>
-                        <label for="${key}${index+1}">${element[0]}</label><br>`
+                        <label for="${key}${index+1}">${element[0]} <span>${element[1]} €</span></label><br>`
                         }
      
 
@@ -96,23 +97,22 @@
                      `
                     }
                 
-                html += '</div></div>'
+                html += '</div></details>'
             }
-            partsHtml+= '<li><h4 id="totalAmount">Total: <span>0 €</span></h4></li></ul>'
+            //partsHtml+= '<li><h4 id="totalAmount">Total: <span>0 €</span></h4></li></ul>'
             const baseElem = document.getElementById('options')
             baseElem.innerHTML = html
             
-            const partsBaseElem = document.getElementById('parts')
-            partsBaseElem.innerHTML = partsHtml
+            //const partsBaseElem = document.getElementById('parts')
+            //partsBaseElem.innerHTML = partsHtml
             
             changeBikeFilter()
 
         }
       
-        initDesktop()
-        updatePrice()
+        initMobile()
+       // updatePrice()
     </script>
-
     <script>
         $(document).ready(function(){
         $('input[type=radio]').click(function(){
@@ -120,29 +120,8 @@
             });
         });
     </script>
-    <script>
-        const scrollContainer = document.querySelector("#options");
-
-        scrollContainer.addEventListener("wheel", (evt) => {
-            evt.preventDefault();
-            document.getElementById("options").setAttribute('style', 'style="scroll-behavior: normal;"')
-            scrollContainer.scrollLeft += evt.deltaY;
-        });
-        
-        const scrolllinks = document.querySelectorAll("ul>li>b>a");
-        scrolllinks.forEach(element => {
-            element.addEventListener("click", (evt) => removeSmooth());
-
-        const removeSmooth = () => {
-            document.getElementById("options").setAttribute('style', 'scroll-behavior: smooth;')
-        }
-                        
-        });
-
-     
 
 
-    </script>
 
 </body>
 </html>
