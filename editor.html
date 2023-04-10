@@ -13,7 +13,7 @@
     <div id="editor">
         <div class="wrapper">
         <div class="editorheader">
-        <h1>Customize your TH8</h1>
+        <h1>Customize your e-motorcycle</h1>
         <div><i>Dark Mode</i>
             <label class="switch">
             <input type="checkbox" id="darkmode" onclick="darkMode()">
@@ -37,7 +37,7 @@
                 <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
         </div>
-        <div id="options">
+        <div id="options" style="scroll-behavior: smooth;">
             
         </div>
         </div>
@@ -66,10 +66,10 @@
                 ['Spark (5 HP)', 1300]
                 ],
             'battery': [
-                ['Li-ion (400 km*)', 1000],
-                ['Li-ion (200 km*)', 800],
-                ['Lead Acid (80 km*)', 700],
-                ['AAA (2 km*)', 500],
+                ['Li-ion (400 km*)', 10000],
+                ['Li-ion (200 km*)', 6000],
+                ['Lead Acid (80 km*)', 7000],
+                ['AAA (2 km*)', 1000],
                 ],
             'tires': [
                 ['Urban', 400],
@@ -77,7 +77,7 @@
                 ['Off-road', 1600]
                 ],
             'color': [
-                ['#000', 400],
+                ['HSL', 400],
                 ],
             }
         
@@ -94,7 +94,7 @@
 
             for (const [key, value] of Object.entries(partsData)) {
                 //console.log(`${key}: ${value}`);
-                partsHtml += `<li id="${key}_txt"><b>${key}</b>`
+                partsHtml += `<li id="${key}_txt"><b><a href="#${key}_option">${key}</a></b>`
                 html += `<div class="option" id="${key}_option">`
                     html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
                     if(key=='color'){
@@ -205,11 +205,12 @@
                 updateView(this.value)
             });
         });
-        
+
         init()
         updatePrice()
-
+        
     </script>
+
     <script>
     function darkMode() {
         var checkBox = document.getElementById("darkmode");
@@ -226,8 +227,22 @@
 
         scrollContainer.addEventListener("wheel", (evt) => {
             evt.preventDefault();
+            document.getElementById("options").setAttribute('style', 'style="scroll-behavior: normal;"')
             scrollContainer.scrollLeft += evt.deltaY;
         });
+        
+        const scrolllinks = document.querySelectorAll("ul>li>b>a");
+        scrolllinks.forEach(element => {
+            element.addEventListener("click", (evt) => removeSmooth());
+
+        const removeSmooth = () => {
+            document.getElementById("options").setAttribute('style', 'scroll-behavior: smooth;')
+        }
+                        
+        });
+
+     
+
 
     </script>
 

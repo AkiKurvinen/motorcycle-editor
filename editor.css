@@ -54,6 +54,11 @@ label:hover{
 /*parts*/
 #parts{
     min-width: 250px;
+    margin-right: 2em;
+}
+#parts a, #parts a:visited{
+    color: rgb(0, 132, 255);
+    text-decoration: none;
 }
 #parts ul{
     list-style-type: none;
@@ -85,6 +90,7 @@ label:hover{
 #preview{
     background-color: #999;
     position: relative;
+    margin-top: 2em;
 }
 #frame{
     position: absolute;
@@ -156,9 +162,12 @@ label:hover{
 }
 #options h3{
     text-transform: capitalize;
+    margin-top: 0;
 }
 .option{
     display: flex;
+    padding-left: 1em;
+    box-sizing: border-box;
 }
 .option img{
     max-height: 125px;
