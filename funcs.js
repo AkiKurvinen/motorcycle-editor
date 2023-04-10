@@ -66,4 +66,30 @@ const darkMode = () => {
             editorElem.className = 'light'
     }
 }
+/* mobile */
 
+const updateMobilePrice = () => {
+    let totalSum = 0
+    document.querySelectorAll('summary span').forEach(element => {
+        totalSum += parseInt(element.innerHTML.replace(' ',''))
+    });
+
+    let price = formatPrice(totalSum)
+    document.querySelector("#priceTag span").innerHTML = `${price}`;
+}
+
+const updateSummaryList = (item, itemNumber) => {
+    const elem = document.getElementById(`${item}_option`)
+    elem.querySelector('i').innerHTML = partsData[item][itemNumber-1][0]
+    elem.querySelector('span').innerHTML = formatPrice(partsData[item][itemNumber-1][1])
+}
+
+
+const updateViewMob = (item) => {
+    const partName = item.slice(0, -1);
+    const itemNumber = parseInt(item.slice(-1));
+
+    updateMotorcycle(partName, itemNumber)
+    updateSummaryList(partName, itemNumber)    
+    updateMobilePrice()
+}

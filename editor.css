@@ -191,10 +191,78 @@ label:hover{
   h1{
     font-size: 1.1em;
   }
+  #priceTag{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+  }
+  #optionsLabels{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 4em 0.5em 0.5em;
+  }
+  .dropIco{
+    font-style: normal;
+  }
   .editorheader{
     padding: 0.5em;
+    height: 50px;
+  }
+  summary{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid gray;
+  }
+  details input{
+    margin-left: 1em;
   }
 
+  details label{
+    display: inline-block;
+    padding-bottom: 1em;
+    width: 80%;
+  }
+  details span{
+    display: block;
+    text-align: right;
+    float: inline-end
+    
+  }
+  details{
+    margin: 0;
+    padding: 0;
+     
+  }
+  details h3{
+    margin: 0;
+  }
+   details > summary:hover{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+   }
+    details > summary {
+    list-style-type: '⯆';
+
+    }
+    summary{
+        position: relative;
+        padding: 0.5em;
+    }
+    summary h3{
+        width: 30%;
+    }
+    details[open] > summary {
+        list-style-type: '⯅';
+    }
+
+    details[open] > summary {
+        margin-bottom: 0.5rem;
+    }
   #preview{
     margin: 0 auto;
     display: block;
@@ -206,13 +274,14 @@ label:hover{
   }
   #options{
     display: block;
-    
+    padding-top: 0;
   }
   #options h3{
     display: inline-block;
   }
   .option{
     display: block;
+    padding-left: 0;
   }
   #colorBall{
     position: relative;

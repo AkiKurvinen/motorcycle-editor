@@ -37,8 +37,8 @@
                 <img src="img/preview/battery1.png" alt="" id="battery">
                 <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
-        <div id="priceTag">Total (VAT 0%) 10000€</div>
-        <div id="optionsLabels">Part Item Eur</div>
+        <div id="priceTag">Total (VAT 0%) <span>10000€</span></div>
+        <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
         <div id="options" style="scroll-behavior: smooth;">
             
         </div>
@@ -60,7 +60,7 @@
                 html += `<details class="option" id="${key}_option">`
                     //html += `<img src="img/thumbs/${key}1.png" alt="" id="${key}_thumb">`
             
-                    html += `<summary><h3>${key}</h3> Carbon Fiber 1000€</summary>`
+                    html += `<summary><h3>${key}</h3><i>${value[0][0]}</i><span>${formatPrice(value[0][1])}</span> <i class="dropIco">▽</i></summary>`
                             if(key=='color'){
                         html += '<div id="colorBall"><img src="img/thumbs/color1.png" alt="" id="color1">'
                         html += '<img src="img/thumbs/color_specular.png" alt="" id="colorSpecular"></div>'
@@ -73,7 +73,7 @@
                         if (key != 'color'){
                         html +=
                         `<input type="radio" id="${key}${index+1}" name="${key}" value="${key}${index+1}" ${checkedVal}>
-                        <label for="${key}${index+1}">${element[0]} <span>${element[1]} €</span></label><br>`
+                        <label for="${key}${index+1}">${element[0]} <span>${element[1]}</span></label><br>`
                         }
      
 
@@ -116,7 +116,7 @@
     <script>
         $(document).ready(function(){
         $('input[type=radio]').click(function(){
-            updateView(this.value)
+            updateViewMob(this.value)
             });
         });
     </script>
