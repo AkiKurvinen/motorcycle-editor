@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor</title>
     <link rel="stylesheet" href="editor.css">
+    <link rel="stylesheet" href="switch.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
     <div id="editor">
+        <div class="editorheader">
         <h1>Customize your TH8</h1>
+        <div>
+            <label class="switch">
+            <input type="checkbox" id="darkmode" onclick="darkMode()">
+            <span class="slider round"></span>
+            </label>
+            </div>
+        </div>
+  
         <div class="split">
             <div id="parts">
                 <ul>
@@ -41,12 +51,14 @@
                 </ul>
             </div>
             <div id="preview">
+                <img src="img/preview/headlight.svg" alt="" id="headlight">
                 <img src="img/preview/frame1.png" alt="" id="frame">
                 <img src="img/preview/seat1.png" alt="" id="seat">
                 <img src="img/preview/color.png" alt="" id="colorhue" style="filter: hue-rotate(90deg);">
                 <img src="img/preview/tires1.png" alt="" id="tires">
                 <img src="img/preview/engine1.png" alt="" id="engine">
                 <img src="img/preview/battery1.png" alt="" id="battery">
+                <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
         </div>
         <div id="options">
@@ -69,6 +81,8 @@
 
     </div>
     <script>
+
+        
         const partsData = {
             'frame': [
                 ['Carbon Fiber', 40000],
@@ -101,6 +115,11 @@
                 ['#000', 400],
                 ],
             }
+        
+        let hue = 0;
+        let saturation = 1;
+        let lightness = 1;
+        
         const init = () => {
             
             let html = '' 
@@ -122,11 +141,21 @@
                     });
                     if (key == 'color'){
                     html+= `
-                      <input type="range" id="colorrange" name="color" min="0" max="360"
-                            oninput="updateHue(this.value)"
-                            onchange="changeHue(this.value)" >
-                    <label for="colorrange">HUE</label>
-                    `
+                      <input type="range" id="colorrange" name="hue" min="0" max="360"
+                            oninput="updateBikeColors('h', this.value)"
+                            onchange="updateBikeColors('h', this.value)" >
+                      <label for="colorrange">H</label>
+
+                      <input type="range" id="colorrange" name="saturation" min="0" max="200" value="100"
+                            oninput="updateBikeColors('s', this.value)"
+                            onchange="updateBikeColors('s', this.value)" >
+                      <label for="colorrange">S</label>
+
+                      <input type="range" id="colorrange" name="lightness" min="0" max="100" value="100"
+                            oninput="updateBikeColors('l', this.value)"
+                            onchange="updateBikeColors('l', this.value)" >
+                      <label for="colorrange">L</label>
+                     `
                     }
 
                 html += '</div></div>'
@@ -136,12 +165,25 @@
             baseElem.innerHTML = html
 
         }
-        const updateHue = (value) => {
+        const changeBikeFilter = () => {
+            document.getElementById('colorhue').setAttribute('style', `filter: hue-rotate(${hue}deg) saturate(${saturation}) brightness(${lightness});`)
+        }
+        const updateBikeColors = (param, value) => {
 
+            if(param == 'h'){
+                 hue = value;
+            }
+            else if(param == 's'){
+                 saturation = value/100;
+            }
+            else if(param == 'l'){
+                 lightness = value/100;
+            }
+           
+            changeBikeFilter()
         }
-        const changeHue = (value) => {
-            document.getElementById('colorhue').setAttribute('style', `filter: hue-rotate(${value}deg)`)
-        }
+
+
         const changeThumbnail = (partName, itemNumber) => {
             const elem = `${partName}_option`
             const thumbnailElem = document.querySelector(`#${elem}>img`)
@@ -174,5 +216,17 @@
         });
         init()
     </script>
+    <script>
+    function darkMode() {
+        var checkBox = document.getElementById("darkmode");
+        var editorElem = document.getElementById("editor");
+        if (checkBox.checked == true){
+           editorElem.className = 'dark'
+        } else {
+             editorElem.className = 'light'
+        }
+        }
+    </script>
+
 </body>
 </html>

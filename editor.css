@@ -1,9 +1,22 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 .split{
     display: flex;
     gap: 1em;
+}
+.editor{
+    background-color: white;
+    color: black;
+}
+.dark{
+    background-color: #111;
+    color: white;
+}
+.editorheader{
+    display: flex;
+    justify-content: space-between;
 }
 #parts{
     min-width: 200px;
@@ -16,12 +29,13 @@ body{
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 #seat{
     position: absolute;
     top: 106px;
     left: 130px;
-    z-index: -1;
+    z-index: 1;
 }
 #colorhue{
     position: absolute;
@@ -30,19 +44,38 @@ body{
     position: absolute;
     top: 175px;
     left: 49px;
-    z-index: -1;
+    z-index: 1;
 }
 #engine{
     position: absolute;
     top: 260px;
     left: 290px;
-    z-index: -1;
+    z-index: 1;
 }
 #battery{
     position: absolute;
     top: 166px;
     left: 250px;
-    z-index: -1; 
+    z-index: 1; 
+}
+#lamp{
+    position: absolute;
+    top: 57px;
+    left: 452px;
+    z-index: 1; 
+}
+#headlight{
+    position: absolute;
+    top: 55px;
+    left: 490px;
+    opacity: 0;
+}
+.dark #headlight{
+    opacity: 1;
+    z-index: 999;
+    filter: blur(10px);
+    mix-blend-mode: hard-light;
+    transition: opacity 1s;
 }
 /* options side scroller*/
 #options{
