@@ -37,12 +37,16 @@
             </div>
        
         <div id="priceTag">Total (VAT 0%) <span>10000€</span></div>
-        <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
-        <div id="options" style="scroll-behavior: smooth;">
-            
+            <div class="scrolls">
+                <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
+                <div id="options" style="scroll-behavior: smooth;">
+                    
+                </div>
+                <div id="changeEditor"><a href="editor.html">Go To Desktop Editor</a></div>
+                 
+            </div>
+           
         </div>
-        </div>
-        <a href="editor.html" id="changeEditor">Go To Desktop Editor</a>
     </div>
 
 
@@ -80,20 +84,20 @@
                     if (key == 'color'){
                     html+= `
                     <div>
-                      <input type="range" id="colorrange" name="hue" min="0" max="360"
+                      <input type="range" id="huerange" name="hue" min="0" max="360"
                             oninput="updateBikeColors('h', this.value)"
                             onchange="updateBikeColors('h', this.value)" >
-                      <label for="colorrange">H</label>
+                      <label for="huerange">H</label>
 
-                      <input type="range" id="colorrange" name="saturation" min="0" max="200" value="100"
+                      <input type="range" id="satrange" name="saturation" min="0" max="200" value="100"
                             oninput="updateBikeColors('s', this.value)"
                             onchange="updateBikeColors('s', this.value)" >
-                      <label for="colorrange">S</label>
+                      <label for="satrange">S</label>
 
-                      <input type="range" id="colorrange" name="lightness" min="0" max="100" value="100"
+                      <input type="range" id="lightrange" name="lightness" min="0" max="100" value="100"
                             oninput="updateBikeColors('l', this.value)"
                             onchange="updateBikeColors('l', this.value)" >
-                      <label for="colorrange">L</label>
+                      <label for="lightrange">L</label>
                       </div>
                      `
                     }
