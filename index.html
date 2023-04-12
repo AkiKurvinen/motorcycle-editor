@@ -21,7 +21,7 @@
             <label class="switch">
             <input type="checkbox" id="darkmode" onclick="darkMode()">
             <span class="slider round"></span>
-            </label>
+            </label><button onclick="reset('desk')" class="resetDeskBtn">Reset</button>
             </div>
         </div>
   
@@ -43,7 +43,7 @@
 
         </div>
 
-        <div id="priceTag">Total (VAT 0%) <span>10000€</span></div>
+        <div id="priceTag">Total (VAT 0%) <span>10000€</span><button onclick="reset('mob')" class="resetMobBtn">Reset</button> </div>
 
             <div class="scrolls">
                 <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
@@ -51,8 +51,10 @@
             </div>
                  
             </div>
-            
+           
         </div>
+        
+        
         </div>
     </div>
 
@@ -60,11 +62,13 @@
         // horizontal scroll parts list in desktop view
         const scrollContainer = document.querySelector("#options");
 
-        scrollContainer.addEventListener("wheel", (evt) => {
+        const ref = (evt) => {
             evt.preventDefault();
             document.getElementById("options").setAttribute('style', 'style="scroll-behavior: normal;"')
             scrollContainer.scrollLeft += evt.deltaY;
-        });
+        }
+
+        
         
         const scrolllinks = document.querySelectorAll("ul>li>b>a");
         scrolllinks.forEach(element => {
@@ -79,30 +83,35 @@
 
     <script>
         // change between dektop and mobile editor
-        const mediaQuery = (x) => {
-
-            if(x.matches){
-                initMobile()
-                updateMobilePrice()
-                $('input[type=radio]').click(function(){
-                    updateViewMob(this.value)
-                });
-            }
-            else{
-                initDesktop()
-                updatePrice()
-                $('input[type=radio]').click(function(){
-                    updateView(this.value)
-                });
-            }
+        const initMob = () =>{
+            initMobile()
+            updateMobilePrice()
+            scrollContainer.removeEventListener("wheel", ref);
+            $('input[type=radio]').click(function(){
+                updateViewMob(this.value)
+            });
+        }
+        const initDesk = () => {
+            initDesktop()
             updatePrice()
-
+            scrollContainer.addEventListener("wheel", ref);
+            $('input[type=radio]').click(function(){
+                updateView(this.value)
+            });
+    }
+        const mediaQuery = (x) => {
+            x.matches ? initMob() : initDesk()
         }
         let x = window.matchMedia("(max-width: 900px)")
         mediaQuery(x)
         x.addListener(mediaQuery)
     </script>
-
+    <script>
+        const reset = (device) =>{
+            console.log('initMobile' + x)
+            device == 'mob' ? initMob() : initDesk()
+        }
+    </script>
 
 
 </body>
