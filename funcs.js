@@ -92,4 +92,5 @@ const updateViewMob = (item) => {
     updateMotorcycle(partName, itemNumber)
     updateSummaryList(partName, itemNumber)    
     updateMobilePrice()
+    
 }

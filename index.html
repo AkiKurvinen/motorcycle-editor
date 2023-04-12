@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="catalog.js"></script>
     <script src="funcs.js"></script>
+    <script src="init.js"></script>
 </head>
 <body>
     <div id="editor">
@@ -21,9 +22,13 @@
             <input type="checkbox" id="darkmode" onclick="darkMode()">
             <span class="slider round"></span>
             </label>
+            </div>
         </div>
-        </div>
-      
+  
+        <div class="split">
+            <div id="parts">
+            </div>
+  
             <div id="preview">
                 <img src="img/preview/headlight.svg" alt="" id="headlight">
                 <img src="img/preview/frame1.png" alt="" id="frame">
@@ -35,33 +40,67 @@
                 <img src="img/preview/battery1.png" alt="" id="battery">
                 <img src="img/preview/lamp.png" alt="" id="lamp">
             </div>
-       
+
+        </div>
+
         <div id="priceTag">Total (VAT 0%) <span>10000€</span></div>
+
             <div class="scrolls">
                 <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
                 <div id="options" style="scroll-behavior: smooth;">
-                    
-                </div>
+            </div>
                  
             </div>
-           
+            
+        </div>
         </div>
     </div>
 
-
-
     <script>
+        // horizontal scroll parts list in desktop view
+        const scrollContainer = document.querySelector("#options");
 
-    
-    </script>
-    <script>
-        $(document).ready(function(){
-        $('input[type=radio]').click(function(){
-            updateViewMob(this.value)
-            });
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            document.getElementById("options").setAttribute('style', 'style="scroll-behavior: normal;"')
+            scrollContainer.scrollLeft += evt.deltaY;
         });
+        
+        const scrolllinks = document.querySelectorAll("ul>li>b>a");
+        scrolllinks.forEach(element => {
+            element.addEventListener("click", (evt) => removeSmooth());
 
+        const removeSmooth = () => {
+            document.getElementById("options").setAttribute('style', 'scroll-behavior: smooth;')
+        }
+                        
+        });
+    </script>
 
+    <script>
+        // change between dektop and mobile editor
+        const mediaQuery = (x) => {
+
+            if(x.matches){
+                initMobile()
+                updateMobilePrice()
+                $('input[type=radio]').click(function(){
+                    updateViewMob(this.value)
+                });
+            }
+            else{
+                initDesktop()
+                updatePrice()
+                $('input[type=radio]').click(function(){
+                    updateView(this.value)
+                });
+            }
+            updatePrice()
+
+        }
+        let x = window.matchMedia("(max-width: 900px)")
+        mediaQuery(x)
+        x.addListener(mediaQuery)
     </script>
 
 

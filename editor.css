@@ -4,6 +4,9 @@ body{
    overflow-x: hidden;
    text-align: center;
 }
+h1{
+    text-transform: uppercase;
+}
 .split{
     display: flex;
     gap: 1em;
@@ -188,6 +191,9 @@ label:hover{
     position: absolute;
     z-index: 2;
 }
+#priceTag, #optionsLabels{
+    display: none;
+}
 @media only screen and (max-width: 900px) {
     html, body{
         max-width: 100vw;
@@ -196,7 +202,12 @@ label:hover{
     h1{
         font-size: 1.1em;
     }
-
+    .split{
+        display: initial;
+    }
+    #parts{
+        display: none;
+    }
     #priceTag{
         background-color: black;
         color: white;
