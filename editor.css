@@ -204,10 +204,25 @@ label:hover{
     display: block;
     margin-left: 2em;
 }
+.mainButton{
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 1em 2em;
+    background-color: crimson;
+    border: none;
+    border-radius: 0.5em;
+    margin-bottom: 2em;
+}
+.mainButton:hover{
+    background-color: rgb(182, 16, 49);
+    cursor: pointer;
+}
 @media only screen and (max-width: 900px) {
     html, body{
         max-width: 100vw;
-        overflow: hidden;
+        overflow-x: hidden;
     }
     h1{
         font-size: 1.1em;
@@ -403,6 +418,9 @@ label:hover{
     #color_option div input{
         margin: 1em 0;
         padding: 0;
+    }
+    #color_option{
+        padding-bottom: 4em;
     }
    
 }

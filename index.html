@@ -47,13 +47,11 @@
 
             <div class="scrolls">
                 <div id="optionsLabels"><span>Part</span> <span>Item</span> <span>Eur</span></div>
-                <div id="options" style="scroll-behavior: smooth;">
-            </div>
-                 
+                    <div id="options" style="scroll-behavior: smooth;">
+                </div>
             </div>
            
         </div>
-        
         
         </div>
     </div>
@@ -68,8 +66,6 @@
             scrollContainer.scrollLeft += evt.deltaY;
         }
 
-        
-        
         const scrolllinks = document.querySelectorAll("ul>li>b>a");
         scrolllinks.forEach(element => {
             element.addEventListener("click", (evt) => removeSmooth());
@@ -98,7 +94,7 @@
             $('input[type=radio]').click(function(){
                 updateView(this.value)
             });
-    }
+        }
         const mediaQuery = (x) => {
             x.matches ? initMob() : initDesk()
         }
@@ -112,7 +108,22 @@
             device == 'mob' ? initMob() : initDesk()
         }
     </script>
+    <script>
+        // Fetch all the details element.
+        const details = document.querySelectorAll("details");
 
+        // Add the onclick listeners.
+        details.forEach((targetDetail) => {
+        targetDetail.addEventListener("click", () => {
+            // Close all the details that are not targetDetail.
+            details.forEach((detail) => {
+            if (detail !== targetDetail) {
+                detail.removeAttribute("open");
+            }
+            });
+        });
+        });
+    </script>
 
 </body>
 </html>

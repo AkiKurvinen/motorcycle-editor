@@ -66,6 +66,7 @@ const darkMode = () => {
             editorElem.className = 'light'
     }
 }
+
 /* mobile */
 
 const updateMobilePrice = () => {
