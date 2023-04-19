@@ -383,6 +383,8 @@ label:hover{
     }
     #preview{
         margin: 0 auto;
+        margin-top: 2em;
+        margin-bottom: 0;
         display: block;
         height: 30vh;
         width: 200vw;

@@ -27,7 +27,7 @@ const initDesktop = () => {
             });
             if (key == 'color'){
             html+= `
-                <input type="range" id="colorrange" name="hue" min="0" max="360"
+                <input type="range" id="colorrange" name="hue" min="0" max="360" value="0"
                     oninput="updateBikeColors('h', this.value)"
                     onchange="updateBikeColors('h', this.value)" >
                 <label for="colorrange">H</label>
@@ -88,7 +88,7 @@ const initMobile = () => {
             if (key == 'color'){
             html+= `
             <div>
-                <input type="range" id="huerange" name="hue" min="0" max="360"
+                <input type="range" id="huerange" name="hue" min="0" max="360" value="0"
                     oninput="updateBikeColors('h', this.value)"
                     onchange="updateBikeColors('h', this.value)" >
                 <label for="huerange">H</label>

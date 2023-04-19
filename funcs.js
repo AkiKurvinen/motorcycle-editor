@@ -85,7 +85,6 @@ const updateSummaryList = (item, itemNumber) => {
     elem.querySelector('span').innerHTML = formatPrice(partsData[item][itemNumber-1][1])
 }
 
-
 const updateViewMob = (item) => {
     const partName = item.slice(0, -1);
     const itemNumber = parseInt(item.slice(-1));
